@@ -43,7 +43,7 @@ export const UserStore = ({ children }) => {
       setError(null);
       setLoading(null);
       setLogin(null);
-      navigate('/login/cadastro');
+      navigate('/login');
       window.localStorage.removeItem('token');
     },
     [navigate],

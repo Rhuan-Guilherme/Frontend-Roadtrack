@@ -3,23 +3,21 @@ import Seta from '../assets/seta.svg?react';
 import More from '../assets/more.svg?react';
 import { UserContext } from '../contexts/UserContext';
 import { Link } from 'react-router-dom';
+import { AnimeContext } from '../contexts/AnimeContext';
 
 const styleButtons =
   'hover:bg-roxo-300 hover:text-white hover:shadow-md block rounded-lg px-1 p-2 font-roboto font-medium transition-all duration-100 text-cinzaEscuro-500 flex gap-2';
 
 const SlideBar = () => {
   const { data, login, userLogout } = React.useContext(UserContext);
-  const [expanded, setExpanded] = useState(false);
-
-  const toggleSlideBar = () => {
-    setExpanded(!expanded);
-  };
+  const { slideExpand, toggleSlideBar, activeModalVips, activeModalLinks } =
+    React.useContext(AnimeContext);
 
   if (!login) return false;
   return (
     <div
       className={`relative h-screen bg-cinza-200 transition-all duration-300 border-r border-cinza-300 ${
-        expanded ? 'w-1/6' : 'w-0 '
+        slideExpand ? 'w-1/6' : 'w-0 '
       }`}
     >
       <button
@@ -28,12 +26,12 @@ const SlideBar = () => {
       >
         <Seta
           className={`${
-            expanded ? 'rotate-180' : 'rotate-0'
+            slideExpand ? 'rotate-180' : 'rotate-0'
           } transition-all duration-300`}
         />
       </button>
 
-      <div className={`${expanded ? 'block' : 'hidden'}  px-3 pt-10`}>
+      <div className={`${slideExpand ? 'block' : 'hidden'}  px-3 pt-10`}>
         <div className="w-full h-14 rounded-md bg-white p-2">
           <div className="flex items-center h-full justify-between">
             <div className="flex gap-2">
@@ -90,11 +88,11 @@ const SlideBar = () => {
               <span className="material-symbols-outlined">table_rows</span>
               <span>Organograma</span>
             </Link>
-            <Link className={styleButtons}>
+            <Link onClick={activeModalVips} className={styleButtons}>
               <span className="material-symbols-outlined">grade</span>
               <span>Vips</span>
             </Link>
-            <Link className={styleButtons}>
+            <Link onClick={activeModalLinks} className={styleButtons}>
               <span className="material-symbols-outlined">share</span>
               <span>Links</span>
             </Link>
