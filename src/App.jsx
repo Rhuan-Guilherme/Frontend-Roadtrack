@@ -7,6 +7,7 @@ import SlideBar from './layout/SlideBar';
 import ListaPage from './Components/ListaChamados/ListaPage';
 import VipsModal from './Components/Modal/VipsModal';
 import LinksModal from './Components/Modal/LinksModal';
+import HomePage from './Components/Home/HomePage';
 
 function App() {
   return (
@@ -14,14 +15,13 @@ function App() {
       <BrowserRouter>
         <UserStore>
           <AnimeStore>
-            {console.log()}
             <Header />
-            <main className="flex">
+            <main className="flex h-[1900px]">
               <SlideBar />
               <VipsModal />
               <LinksModal />
               <Routes>
-                <Route path="/" element={<div>Home</div>} />
+                <Route path="/" element={<HomePage />} />
                 <Route path="/login/*" element={<LoginPage />} />
                 <Route path="/lista" element={<ListaPage />} />
               </Routes>

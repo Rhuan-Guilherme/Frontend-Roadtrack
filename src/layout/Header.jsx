@@ -9,14 +9,14 @@ const Header = () => {
 
   if (!login) return false;
   return (
-    <header className="flex p-2 justify-between md:px-10 lg:grid lg:grid-cols-3 items-center md:justify-items-start lg:justify-items-center bg-cinza-200 w-full h-16  border-b border-cinza-300">
-      <div
+    <header className="flex p-2 justify-between md:px-10 lg:flex lg:px-[10%] items-center md:justify-items-start lg:justify-items-center bg-cinza-200 w-full h-16  border-b border-cinza-300">
+      <Link
+        to="/"
         id="logo"
         className="font-bold text-2xl font-roboto text-cinzaEscuro-700"
       >
-        {/* <button onClick={userLogout}>logf</button> */}
-        RoadTrack
-      </div>
+        Logo RoadTrack
+      </Link>
       <nav className="hidden lg:flex gap-5 font-semibold font-poppins text-cinzaEscuro-500">
         <Link to="/home">Home</Link>
         <Link to="/organograma">Organograma</Link>
