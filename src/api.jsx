@@ -38,3 +38,15 @@ export function GET_USER(token) {
     },
   };
 }
+
+export function GET_VIPS() {
+  return {
+    url: API_URL + 'vips',
+    options: {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  };
+}

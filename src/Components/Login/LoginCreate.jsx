@@ -22,7 +22,7 @@ const LoginCreate = () => {
         <Input label="Nome" type="text" name="nome" />
         <Input label="E-mail" type="text" name="email" />
         <Input label="Senha" type="password" name="password" />
-        <Button>Acessar</Button>
+        <Button>Cadastre-se</Button>
       </form>
     </section>
   );

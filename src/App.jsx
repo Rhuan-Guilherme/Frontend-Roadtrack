@@ -1,13 +1,14 @@
-import Header from './layout/Header';
-import LoginPage from './Components/Login/LoginPage';
+import './styles.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserStore } from './contexts/UserContext';
 import { AnimeStore } from './contexts/AnimeContext';
+import Header from './layout/Header';
 import SlideBar from './layout/SlideBar';
+import LoginPage from './Components/Login/LoginPage';
+import HomePage from './Components/Home/HomePage';
 import ListaPage from './Components/ListaChamados/ListaPage';
 import VipsModal from './Components/Modal/VipsModal';
 import LinksModal from './Components/Modal/LinksModal';
-import HomePage from './Components/Home/HomePage';
 
 function App() {
   return (
@@ -16,7 +17,7 @@ function App() {
         <UserStore>
           <AnimeStore>
             <Header />
-            <main className="flex h-[1900px]">
+            <main className="mainContainer">
               <SlideBar />
               <VipsModal />
               <LinksModal />

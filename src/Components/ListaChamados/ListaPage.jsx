@@ -8,7 +8,7 @@ const ListaPage = () => {
   const { login } = React.useContext(UserContext);
   const { slideExpand } = React.useContext(AnimeContext);
 
-  // if (!login) return <Navigate to="/login" />;
+  if (!login) return <Navigate to="/login" />;
   return (
     <main
       className={`w-full mt-10 ${

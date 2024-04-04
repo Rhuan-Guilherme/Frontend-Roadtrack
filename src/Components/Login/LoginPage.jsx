@@ -9,7 +9,7 @@ import { UserContext } from '../../contexts/UserContext';
 const LoginPage = () => {
   const { login } = React.useContext(UserContext);
 
-  // if (login) return <Navigate to="/conta" />;
+  if (login) return <Navigate to="/" />;
   return (
     <div className="flex w-screen h-screen items-center bg-cinza-100">
       <section className="lg:w-[50%] hidden lg:flex flex-col items-center justify-center h-screen p-3">
