@@ -2,8 +2,8 @@ import './styles.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { UserStore } from './contexts/UserContext';
 import { AnimeStore } from './contexts/AnimeContext';
-import Header from './layout/Header';
-import SlideBar from './layout/SlideBar';
+import Header from './Components/layout/Header';
+import SlideBar from './Components/layout/SlideBar';
 import LoginPage from './Components/Login/LoginPage';
 import HomePage from './Components/Home/HomePage';
 import ListaPage from './Components/ListaChamados/ListaPage';
@@ -17,7 +17,7 @@ function App() {
         <UserStore>
           <AnimeStore>
             <Header />
-            <main className="mainContainer">
+            <main className="mainContainer dark:bg-cinzaRoxo-600">
               <SlideBar />
               <VipsModal />
               <LinksModal />

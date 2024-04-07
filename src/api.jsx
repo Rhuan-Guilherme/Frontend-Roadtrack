@@ -89,3 +89,15 @@ export function DELETE_VIPS(id) {
     },
   };
 }
+
+export function GET_TIKECTS(id) {
+  return {
+    url: API_URL + `tickets?id=${id}`,
+    options: {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  };
+}

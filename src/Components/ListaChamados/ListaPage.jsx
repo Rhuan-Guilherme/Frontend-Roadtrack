@@ -3,10 +3,42 @@ import { UserContext } from '../../contexts/UserContext';
 import { Navigate } from 'react-router';
 import { AnimeContext } from '../../contexts/AnimeContext';
 import Button from '../Form/Button';
+import { GET_TIKECTS } from '../../api';
+
+const types = {
+  chamado: {
+    text: 'Chamado',
+    color: '#7161EF',
+  },
+  queda: {
+    text: 'Queda de ligação',
+    color: '#38B000',
+  },
+  transferencia: {
+    text: 'Transferência de ligação',
+    color: '#7161EF',
+  },
+  reiteracao: {
+    text: 'Reiteração de chamado',
+    color: '#FF0000',
+  },
+};
 
 const ListaPage = () => {
-  const { login } = React.useContext(UserContext);
+  const { login, data } = React.useContext(UserContext);
   const { slideExpand } = React.useContext(AnimeContext);
+  const [tickets, setTickets] = React.useState([]);
+
+  const returnTickets = async () => {
+    const { url, options } = GET_TIKECTS(data.id);
+    const response = await fetch(url, options);
+    const json = await response.json();
+    setTickets(json);
+  };
+
+  React.useEffect(() => {
+    returnTickets();
+  }, []);
 
   if (!login) return <Navigate to="/login" />;
   return (
@@ -46,20 +78,32 @@ const ListaPage = () => {
           <Button>PESQUISAR</Button>
         </form>
       </div>
-      <section className="flex w-full mt-6 font-poppins">
-        <div className="flex bg-roxo-600 w-3 rounded-l"></div>
-        <div className="flex w-full bg-cinza-300 rounded-r">
-          <div className="font-medium p-3 border-r-2 border-cinza-500">
-            Rhuan - 1546
-          </div>
-          <div className="font-medium text-cinzaEscuro-600 p-3 border-r-2 border-cinza-500">
-            12/03/2024 às 21:25
-          </div>
-          <div className="p-3">
-            solicitando o fornecimento de uma máquina para...
-          </div>
-        </div>
-      </section>
+      {tickets && (
+        <section className="flex flex-col gap-2 w-full mt-6 font-poppins mb-3">
+          {tickets.map((ticket) => (
+            <div key={ticket.id} className="flex">
+              <div
+                className={`flex w-3 rounded-l ${
+                  ticket.tipo &&
+                  Object.prototype.hasOwnProperty.call(types, ticket.tipo) &&
+                  `bg-[${types[ticket.tipo].color}]`
+                }`}
+              ></div>
+              <div className="flex w-full bg-cinza-300 rounded-r box-border">
+                <div className="font-medium p-3 border-r-2 border-cinza-500">
+                  {`${ticket.nome} - ${ticket.ramal}`}
+                </div>
+                <div className="font-medium text-cinzaEscuro-600 p-3 border-r-2 border-cinza-500">
+                  {ticket.created_at}
+                </div>
+                <div className="p-3 text-clip truncate w-96">
+                  {ticket.informacao}...
+                </div>
+              </div>
+            </div>
+          ))}
+        </section>
+      )}
     </main>
   );
 };

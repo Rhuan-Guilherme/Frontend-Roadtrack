@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { Modal, Table } from 'flowbite-react';
+import { Modal, Table, Tooltip } from 'flowbite-react';
 import { AnimeContext } from '../../contexts/AnimeContext';
 import Button from '../Form/Button';
 import useUsers from '../../hooks/useUsers';
@@ -50,8 +50,10 @@ const VipsModal = () => {
         size={modalSize}
         onClose={() => setOpenModalVips(false)}
       >
-        <Modal.Header>Lista de VIPS</Modal.Header>
-        <Modal.Body>
+        <Modal.Header className="dark:bg-cinzaRoxo-800  dark:border-t dark:border-x dark:border-cinzaRoxo-100">
+          Lista de VIPS
+        </Modal.Header>
+        <Modal.Body className="dark:bg-cinzaRoxo-600 rounded-b-md dark:border-b dark:border-x dark:border-cinzaRoxo-100">
           <div>
             <form onSubmit={handleSubmit} className="flex gap-3">
               <div className=" w-3/6 relative">
@@ -60,7 +62,7 @@ const VipsModal = () => {
                   onChange={onChange}
                   type="text"
                   placeholder="Login"
-                  className="border border-cinza-400 w-full text-base p-3 bg-cinza-300 rounded-lg transition-all
+                  className="border border-cinza-400 w-full text-base p-3 bg-cinza-300 dark:bg-cinzaRoxo-700 dark:border-cinzaRoxo-100 rounded-lg transition-all
                           focus:outline-none focus:border-roxo-300 focus:shadow-[0_0_0_2px_#B8ACFF] focus:bg-cinza-100
                           hover:outline-none hover:border-roxo-300 hover:shadow-[0_0_0_2px_#B8ACFF] hover:bg-cinza-100"
                 />
@@ -103,19 +105,21 @@ const VipsModal = () => {
                 {vip &&
                   vip.map((item) => (
                     <Table.Body key={item.id} className="divide-y">
-                      <Table.Row className="bg-cinza-200 border-b border-cinza-700">
-                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900">
+                      <Table.Row className="bg-cinza-200 dark:bg-cinzaRoxo-800 border-b border-cinza-700 dark:border-cinzaRoxo-200">
+                        <Table.Cell className="whitespace-nowrap font-medium text-cinzaEscuro-900 dark:text-cinza-300">
                           {item.Name}
                         </Table.Cell>
                         <Table.Cell>{item.login}</Table.Cell>
                         <Table.Cell>{item.area}</Table.Cell>
                         <Table.Cell>
-                          <button
-                            onDoubleClick={() => deleteVip(item.id)}
-                            className="bg-red-600 p-2 text-white font-poppins rounded-lg"
-                          >
-                            Deletar
-                          </button>
+                          <Tooltip content="Duplo clique">
+                            <button
+                              onDoubleClick={() => deleteVip(item.id)}
+                              className="bg-red-600 dark:bg-red-700 p-2 text-white font-poppins rounded-lg"
+                            >
+                              Deletar
+                            </button>
+                          </Tooltip>
                         </Table.Cell>
                       </Table.Row>
                     </Table.Body>
