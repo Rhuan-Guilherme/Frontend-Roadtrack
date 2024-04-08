@@ -79,7 +79,7 @@ const SlideBar = () => {
               <span className="material-symbols-outlined">dark_mode</span>
               <span className="hidden md:inline leading-6">Modo Escuro</span>
             </Link>
-            <Link className={styleButtons}>
+            <Link to="/conta" className={styleButtons}>
               <span className="material-symbols-outlined">settings</span>
               <span className="hidden md:inline leading-6">Configurações</span>
             </Link>

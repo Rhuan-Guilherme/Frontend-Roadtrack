@@ -17,9 +17,9 @@ const LoginPage = () => {
           <h1 className="text-cinza-100 lg:text-8xl 2xl:text-9xl font-semibold">
             RoadTrack
           </h1>
-          <p className="text-cinza-200 text-center">
-            Sua solução completa para o gerenciamento eficiente <br /> o
-            registro de chamados em 1º nível
+          <p className="text-cinza-200 text-center mt-4">
+            Sua solução completa para o gerenciamento eficiente <br /> para o
+            registo de monitoramentos de servicedesk.
           </p>
         </div>
       </section>

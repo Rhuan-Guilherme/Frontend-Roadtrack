@@ -1,9 +1,14 @@
 import React from 'react';
 import { AnimeContext } from '../../contexts/AnimeContext';
+import { Navigate } from 'react-router-dom';
 import ButtonTicket from './ButtonTicket';
+import { UserContext } from '../../contexts/UserContext';
 
 const HomePage = () => {
+  const { login } = React.useContext(UserContext);
   const { slideExpand } = React.useContext(AnimeContext);
+
+  if (!login) return <Navigate to="/login" />;
   return (
     <main
       className={`w-full mt-10 flex flex-col items-center ${

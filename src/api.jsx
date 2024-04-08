@@ -39,6 +39,19 @@ export function GET_USER(token) {
   };
 }
 
+export function CREATE_USER(body) {
+  return {
+    url: API_URL + 'cadastro',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
 export function TERMO_USER(termo) {
   return {
     url: API_URL + 'usuarios',
@@ -98,6 +111,19 @@ export function GET_TIKECTS(id) {
       headers: {
         'Content-Type': 'application/json',
       },
+    },
+  };
+}
+
+export function ALTER_DADOS(body) {
+  return {
+    url: API_URL + 'dados',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
     },
   };
 }

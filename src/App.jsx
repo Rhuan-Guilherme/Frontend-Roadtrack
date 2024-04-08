@@ -9,6 +9,7 @@ import HomePage from './Components/Home/HomePage';
 import ListaPage from './Components/ListaChamados/ListaPage';
 import VipsModal from './Components/Modal/VipsModal';
 import LinksModal from './Components/Modal/LinksModal';
+import AccountPage from './Components/Account/AccountPage';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/" element={<HomePage />} />
                 <Route path="/login/*" element={<LoginPage />} />
                 <Route path="/lista" element={<ListaPage />} />
+                <Route path="/conta" element={<AccountPage />} />
               </Routes>
             </main>
           </AnimeStore>

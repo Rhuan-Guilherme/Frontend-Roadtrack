@@ -15,7 +15,7 @@ const Header = () => {
         id="logo"
         className="font-bold text-2xl font-roboto text-cinzaEscuro-700 dark:text-cinza-100"
       >
-        Logo RoadTrack
+        RoadTrack
       </Link>
       <nav className="hidden lg:flex gap-5 font-semibold font-poppins text-cinzaEscuro-500 dark:text-cinza-100">
         <Link to="/home">Home</Link>

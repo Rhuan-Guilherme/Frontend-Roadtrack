@@ -29,7 +29,7 @@ export const UserStore = ({ children }) => {
       const json = await reponse.json();
       window.localStorage.setItem('token', json.token);
       await getUser(json.token);
-      navigate('/');
+      navigate('/conta');
     } catch (err) {
       setError('Usuário ou senha inváildos!');
     } finally {
