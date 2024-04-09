@@ -7,16 +7,17 @@ const InputEdit = ({
   setValue,
   estilo,
   edit,
+  name,
   ...props
 }) => {
   return (
     <div className="flex flex-col">
-      <label htmlFor="">{children}</label>
+      <label htmlFor={name}>{children}</label>
       <div className="flex items-center">
         <input
           type={type}
-          name=""
-          id=""
+          name={name}
+          id={name}
           value={value}
           {...props}
           onChange={({ target }) => setValue(target.value)}

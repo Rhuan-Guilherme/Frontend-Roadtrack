@@ -3,7 +3,7 @@ import { UserContext } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
 
 const Header = () => {
-  const [pesquisa, setPesquisa] = React.useState(null);
+  const [pesquisa, setPesquisa] = React.useState('');
 
   const { data, login, userLogout } = React.useContext(UserContext);
 

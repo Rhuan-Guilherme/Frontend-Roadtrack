@@ -5,17 +5,18 @@ import { UserContext } from '../../contexts/UserContext';
 import { ALTER_DADOS } from '../../api';
 import { useNavigate } from 'react-router-dom';
 import ModalConfirmation from './ModalConfirmation';
+import { Navigate, Route, Routes } from 'react-router';
 
 const AccountPage = () => {
   const { slideExpand } = React.useContext(AnimeContext);
-  const { userLogout } = React.useContext(UserContext);
-  const navigate = useNavigate();
+  const { userLogout, login } = React.useContext(UserContext);
   const { data } = React.useContext(UserContext);
   const [edit, setEdit] = React.useState(false);
   const [nome, setNome] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [id, setId] = React.useState('');
   const [openModal, setOpenModal] = React.useState();
+  const navigate = useNavigate();
 
   const alterDados = React.useCallback(
     async (e) => {
@@ -47,6 +48,7 @@ const AccountPage = () => {
     setOpenModal(true);
   }
 
+  if (!login) return <Navigate to="/login" />;
   return (
     <section
       className={`w-full mt-10 ${
@@ -63,10 +65,20 @@ const AccountPage = () => {
         <form className="flex flex-col gap-4">
           {edit ? (
             <div className="flex flex-col gap-4">
-              <InputEdit value={nome} setValue={setNome} edit={edit}>
+              <InputEdit
+                name="nome"
+                value={nome}
+                setValue={setNome}
+                edit={edit}
+              >
                 Seu nome
               </InputEdit>
-              <InputEdit value={email} setValue={setEmail} edit={edit}>
+              <InputEdit
+                name="email"
+                value={email}
+                setValue={setEmail}
+                edit={edit}
+              >
                 E-mail
               </InputEdit>
             </div>
@@ -76,6 +88,7 @@ const AccountPage = () => {
                 disabled
                 value={nome}
                 type="text"
+                name="nome"
                 setValue={setNome}
                 edit={edit}
                 estilo="opacity-50 cursor-not-allowed"
@@ -86,6 +99,7 @@ const AccountPage = () => {
                 disabled
                 value={email}
                 type="text"
+                name="email"
                 setValue={setNome}
                 edit={edit}
                 estilo="opacity-50 cursor-not-allowed"

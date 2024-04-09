@@ -6,6 +6,7 @@ import useForm from '../../hooks/useForm';
 import { CREATE_USER } from '../../api';
 import { UserContext } from '../../contexts/UserContext';
 import { useNavigate } from 'react-router-dom';
+import Loader from '../layout/Loader';
 
 const LoginCreate = () => {
   const navigate = useNavigate();
@@ -14,26 +15,35 @@ const LoginCreate = () => {
   const password = useForm();
   const [erro, setErro] = React.useState(false);
   const [message, setMessage] = React.useState(false);
+  const [loading, setLoading] = React.useState(false);
 
   async function handleSubmit(event) {
     event.preventDefault();
     if (email.validate() && password.validate()) {
-      const { url, options } = CREATE_USER({
-        nome: nome.value,
-        email: email.value,
-        senha: password.value,
-      });
-      const response = await fetch(url, options);
-      if (response.ok) {
-        const json = await response.json();
-        setErro(false);
-        setMessage('Conta criada com sucesso!');
-        setTimeout(() => {
-          navigate('/login');
-        }, 2500);
-      } else {
-        setMessage('E-mail ja cadastrado! Tente novamente.');
-        setErro(true);
+      try {
+        setLoading(true);
+        const { url, options } = CREATE_USER({
+          nome: nome.value,
+          email: email.value,
+          senha: password.value,
+        });
+        const response = await fetch(url, options);
+        if (response.ok) {
+          setErro(false);
+          setMessage('Conta criada com sucesso!');
+          setTimeout(() => {
+            navigate('/login');
+          }, 2500);
+        } else {
+          setLoading(false);
+          const json = await response.json();
+          setMessage(json.message);
+          setErro(true);
+        }
+      } catch (error) {
+        console.error(erro);
+      } finally {
+        setLoading(false);
       }
     }
   }
@@ -66,7 +76,10 @@ const LoginCreate = () => {
           </p>
         )}
 
-        <Button>Cadastre-se</Button>
+        <div className="flex items-center gap-4">
+          <Button>Cadastre-se</Button>
+          {loading && <Loader />}
+        </div>
       </form>
     </section>
   );

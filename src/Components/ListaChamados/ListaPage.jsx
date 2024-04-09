@@ -5,40 +5,25 @@ import { AnimeContext } from '../../contexts/AnimeContext';
 import Button from '../Form/Button';
 import { GET_TIKECTS } from '../../api';
 
-const types = {
-  chamado: {
-    text: 'Chamado',
-    color: '#7161EF',
-  },
-  queda: {
-    text: 'Queda de ligação',
-    color: '#38B000',
-  },
-  transferencia: {
-    text: 'Transferência de ligação',
-    color: '#7161EF',
-  },
-  reiteracao: {
-    text: 'Reiteração de chamado',
-    color: '#FF0000',
-  },
-};
-
 const ListaPage = () => {
   const { login, data } = React.useContext(UserContext);
   const { slideExpand } = React.useContext(AnimeContext);
   const [tickets, setTickets] = React.useState([]);
+  const [id, setId] = React.useState(null);
 
-  const returnTickets = async () => {
-    const { url, options } = GET_TIKECTS(data.id);
+  const returnTickets = React.useCallback(async () => {
+    const { url, options } = GET_TIKECTS(id);
     const response = await fetch(url, options);
     const json = await response.json();
     setTickets(json);
-  };
+  }, [id]);
 
   React.useEffect(() => {
+    if (data) {
+      setId(data.id || '');
+    }
     returnTickets();
-  }, []);
+  }, [returnTickets, data]);
 
   if (!login) return <Navigate to="/login" />;
   return (
@@ -84,9 +69,15 @@ const ListaPage = () => {
             <div key={ticket.id} className="flex">
               <div
                 className={`flex w-3 rounded-l ${
-                  ticket.tipo &&
-                  Object.prototype.hasOwnProperty.call(types, ticket.tipo) &&
-                  `bg-[${types[ticket.tipo].color}]`
+                  ticket.tipo === 'chamado'
+                    ? 'bg-roxo-400'
+                    : ticket.tipo === 'queda'
+                    ? 'bg-green-500'
+                    : ticket.tipo === 'reiteracao'
+                    ? 'bg-red-500'
+                    : ticket.tipo === 'transferencia'
+                    ? 'bg-blue-500'
+                    : 'bg-slate-400'
                 }`}
               ></div>
               <div className="flex w-full bg-cinza-300 rounded-r box-border">
