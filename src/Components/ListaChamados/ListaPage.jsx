@@ -66,20 +66,8 @@ const ListaPage = () => {
       {tickets && (
         <section className="flex flex-col gap-2 w-full mt-6 font-poppins mb-3">
           {tickets.map((ticket) => (
-            <div key={ticket.id} className="flex">
-              <div
-                className={`flex w-3 rounded-l ${
-                  ticket.tipo === 'chamado'
-                    ? 'bg-roxo-400'
-                    : ticket.tipo === 'queda'
-                    ? 'bg-green-500'
-                    : ticket.tipo === 'reiteracao'
-                    ? 'bg-red-500'
-                    : ticket.tipo === 'transferencia'
-                    ? 'bg-blue-500'
-                    : 'bg-slate-400'
-                }`}
-              ></div>
+            <div key={ticket.id} className="flex box-border ">
+              <div className="flex w-3 rounded-l bg-roxo-400"></div>
               <div className="flex w-full bg-cinza-300 rounded-r box-border">
                 <div className="font-medium p-3 border-r-2 border-cinza-500">
                   {`${ticket.nome} - ${ticket.ramal}`}

@@ -115,6 +115,19 @@ export function GET_TIKECTS(id) {
   };
 }
 
+export function POST_TICKETS(body) {
+  return {
+    url: API_URL + 'tickets',
+    options: {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
 export function ALTER_DADOS(body) {
   return {
     url: API_URL + 'dados',
