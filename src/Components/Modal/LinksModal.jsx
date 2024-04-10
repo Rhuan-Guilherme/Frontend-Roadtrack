@@ -1,4 +1,3 @@
-'use client';
 import React from 'react';
 import { Modal, Table } from 'flowbite-react';
 import Button from '../Form/Button';
