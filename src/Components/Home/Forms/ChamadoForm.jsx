@@ -5,9 +5,11 @@ import { Tooltip } from 'flowbite-react';
 import useUsers from '../../../hooks/useUsers';
 import { POST_TICKETS } from '../../../api';
 import { UserContext } from '../../../contexts/UserContext';
+import { TikectesContext } from '../../../contexts/TikectesContext';
 
 const ChamadoForm = () => {
   const { data } = React.useContext(UserContext);
+  const { returnTickets, tickets } = React.useContext(TikectesContext);
   const { users, setUsers, returnUsers } = useUsers();
   const [login, setLogin] = React.useState('');
   const [nome, setNome] = React.useState('');
@@ -17,11 +19,17 @@ const ChamadoForm = () => {
   const [patrimonio, setPatrimonio] = React.useState('');
   const [informacao, setInformacao] = React.useState('');
   const [local, setLocal] = React.useState('');
-  const [tipo, setTipo] = React.useState('');
   const [cargo, setCargo] = React.useState('');
 
-  async function postTikects(e) {
-    e.preventDefault();
+  async function postTikects(tipoChamado) {
+    const now = new Date();
+    const dia = now.getDate();
+    const mes = now.getMonth() + 1;
+    const ano = now.getFullYear();
+    const hora = now.getHours();
+    const minuto = now.getMinutes();
+    const minutoFormatado = minuto < 10 ? `0${minuto}` : minuto;
+
     const { url, options } = POST_TICKETS({
       user_id: data.id,
       criador: data.nome,
@@ -33,11 +41,12 @@ const ChamadoForm = () => {
       patrimonio,
       informacao,
       local,
-      tipo: vip ? 'vip' : 'chamado',
+      created_at: `${dia}/${mes}/${ano} às ${hora}:${minutoFormatado}`,
+      tipo: tipoChamado,
+      vip: vip ? 'sim' : 'nao',
     });
     const response = await fetch(url, options);
     const json = await response.json();
-    console.log(json);
     setLogin('');
     setNome('');
     setArea('');
@@ -47,6 +56,12 @@ const ChamadoForm = () => {
     setInformacao('');
     setLocal('');
     setVip('');
+    returnTickets();
+  }
+
+  function handleClick(e) {
+    e.preventDefault();
+    postTikects('chamado');
   }
 
   const clickUser = (targer) => {
@@ -98,7 +113,7 @@ const ChamadoForm = () => {
             </div>
           )}
 
-          <div className="flex flex-col gap-1 w-full relative">
+          <div className="flex flex-col gap-1 w-full relative -top-[3px]">
             <label htmlFor="login">Login</label>
             <InputsHome
               type="text"
@@ -106,7 +121,7 @@ const ChamadoForm = () => {
               value={login}
               onChange={handleLogin}
             />
-            {users && (
+            {users && users.length > 0 && (
               <div className="w-full bg-cinza-200 max-h-96 border border-cinza-400 overflow-x-auto z-10 rounded-md mt-1 absolute flex flex-col gap-1 shadow-xl top-[4.5rem] ">
                 {users.map((user) => (
                   <div
@@ -168,7 +183,7 @@ const ChamadoForm = () => {
           </InputsHome>
         </div>
         <div>
-          <Button onClick={postTikects}>Registrar</Button>
+          <Button onClick={handleClick}>Registrar</Button>
         </div>
       </form>
     </>

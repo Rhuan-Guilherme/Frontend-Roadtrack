@@ -3,27 +3,12 @@ import { UserContext } from '../../contexts/UserContext';
 import { Navigate } from 'react-router';
 import { AnimeContext } from '../../contexts/AnimeContext';
 import Button from '../Form/Button';
-import { GET_TIKECTS } from '../../api';
+import { TikectesContext } from '../../contexts/TikectesContext';
 
 const ListaPage = () => {
-  const { login, data } = React.useContext(UserContext);
+  const { login } = React.useContext(UserContext);
   const { slideExpand } = React.useContext(AnimeContext);
-  const [tickets, setTickets] = React.useState([]);
-  const [id, setId] = React.useState(null);
-
-  const returnTickets = React.useCallback(async () => {
-    const { url, options } = GET_TIKECTS(id);
-    const response = await fetch(url, options);
-    const json = await response.json();
-    setTickets(json);
-  }, [id]);
-
-  React.useEffect(() => {
-    if (data) {
-      setId(data.id || '');
-    }
-    returnTickets();
-  }, [returnTickets, data]);
+  const { tickets } = React.useContext(TikectesContext);
 
   if (!login) return <Navigate to="/login" />;
   return (

@@ -7,11 +7,14 @@ import ChamadoForm from './Forms/ChamadoForm';
 import QuedaForm from './Forms/QuedaForm';
 import ReiteracaoForm from './Forms/ReiteracaoForm';
 import TrasnferenciaForm from './Forms/TrasnferenciaForm';
+import { TikectesContext } from '../../contexts/TikectesContext';
+import Ticket from './Ticket';
 
 const HomePage = () => {
   const { login } = React.useContext(UserContext);
   const { slideExpand } = React.useContext(AnimeContext);
   const [formSelect, setFormSelect] = React.useState('chamado');
+  const { tickets } = React.useContext(TikectesContext);
 
   const handleFormSelect = (value) => {
     setFormSelect(value);
@@ -57,6 +60,14 @@ const HomePage = () => {
         {formSelect === 'trasnferencia' && <TrasnferenciaForm />}
         {formSelect === 'queda' && <QuedaForm />}
       </div>
+
+      {tickets && (
+        <section className="mt-10 bg-cinza-300 w-full p-3 flex flex-wrap gap-3 items-center justify-center">
+          {tickets.map((tiket) => (
+            <Ticket tiket={tiket} />
+          ))}
+        </section>
+      )}
     </main>
   );
 };

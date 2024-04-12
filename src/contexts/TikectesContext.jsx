@@ -2,7 +2,9 @@ import React from 'react';
 import { UserContext } from '../contexts/UserContext';
 import { GET_TIKECTS } from '../api';
 
-const useTickets = () => {
+export const TikectesContext = React.createContext();
+
+export const TikectesStore = ({ children }) => {
   const { data } = React.useContext(UserContext);
   const [tickets, setTickets] = React.useState([]);
   const [id, setId] = React.useState(null);
@@ -20,8 +22,11 @@ const useTickets = () => {
     }
     returnTickets();
   }, [returnTickets, data]);
-
-  return { tickets, setTickets, id, setId, returnTickets };
+  return (
+    <TikectesContext.Provider
+      value={{ tickets, setTickets, id, setId, returnTickets }}
+    >
+      {children}
+    </TikectesContext.Provider>
+  );
 };
-
-export default useTickets;
