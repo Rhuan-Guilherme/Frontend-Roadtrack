@@ -3,61 +3,33 @@ import InputsHome from '../InputsHome';
 import Button from '../../Form/Button';
 import { Tooltip } from 'flowbite-react';
 import useUsers from '../../../hooks/useUsers';
-import { POST_TICKETS } from '../../../api';
-import { UserContext } from '../../../contexts/UserContext';
+import Loader from '../../layout/Loader';
 import { TikectesContext } from '../../../contexts/TikectesContext';
 
 const ChamadoForm = () => {
-  const { data } = React.useContext(UserContext);
-  const { returnTickets, tickets } = React.useContext(TikectesContext);
+  const {
+    postTikects,
+    login,
+    setLogin,
+    nome,
+    setNome,
+    vip,
+    setVip,
+    area,
+    setArea,
+    ramal,
+    setRamal,
+    patrimonio,
+    setPatrimonio,
+    informacao,
+    setInformacao,
+    local,
+    setLocal,
+    cargo,
+    setCargo,
+    loading,
+  } = React.useContext(TikectesContext);
   const { users, setUsers, returnUsers } = useUsers();
-  const [login, setLogin] = React.useState('');
-  const [nome, setNome] = React.useState('');
-  const [vip, setVip] = React.useState(false);
-  const [area, setArea] = React.useState('');
-  const [ramal, setRamal] = React.useState('');
-  const [patrimonio, setPatrimonio] = React.useState('');
-  const [informacao, setInformacao] = React.useState('');
-  const [local, setLocal] = React.useState('');
-  const [cargo, setCargo] = React.useState('');
-
-  async function postTikects(tipoChamado) {
-    const now = new Date();
-    const dia = now.getDate();
-    const mes = now.getMonth() + 1;
-    const ano = now.getFullYear();
-    const hora = now.getHours();
-    const minuto = now.getMinutes();
-    const minutoFormatado = minuto < 10 ? `0${minuto}` : minuto;
-
-    const { url, options } = POST_TICKETS({
-      user_id: data.id,
-      criador: data.nome,
-      login,
-      nome,
-      cargo,
-      area,
-      ramal,
-      patrimonio,
-      informacao,
-      local,
-      created_at: `${dia}/${mes}/${ano} às ${hora}:${minutoFormatado}`,
-      tipo: tipoChamado,
-      vip: vip ? 'sim' : 'nao',
-    });
-    const response = await fetch(url, options);
-    const json = await response.json();
-    setLogin('');
-    setNome('');
-    setArea('');
-    setCargo('');
-    setRamal('');
-    setPatrimonio('');
-    setInformacao('');
-    setLocal('');
-    setVip('');
-    returnTickets();
-  }
 
   function handleClick(e) {
     e.preventDefault();
@@ -182,8 +154,9 @@ const ChamadoForm = () => {
             Local
           </InputsHome>
         </div>
-        <div>
+        <div className="flex items-center gap-4">
           <Button onClick={handleClick}>Registrar</Button>
+          {loading && <Loader />}
         </div>
       </form>
     </>

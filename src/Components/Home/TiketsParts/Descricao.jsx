@@ -16,6 +16,41 @@ const Descricao = ({ tiket }) => {
           <p>Patrimônio: {tiket.patrimonio}</p>
         </>
       )}
+
+      {tiket.tipo === 'queda' && (
+        <>
+          <p>
+            Senhor(a) Senhor(a) não identificado entrou em contato com o
+            helpdesk no ramal 3416 e interrompeu a ligação antes do atendimento
+            inicial.
+          </p>
+          <p>Ramal: {tiket.ramal}</p>
+        </>
+      )}
+
+      {tiket.tipo === 'trasnferencia' && (
+        <>
+          <p>
+            Senhor(a) {tiket.nome} entrou em contato solicitando transferência
+            de ligação para o(a) senhor(a) {tiket.destinatario}.
+          </p>
+          <p>Ramal: {tiket.ramal}</p>
+        </>
+      )}
+      {tiket.tipo === 'reiteracao' && (
+        <>
+          <p>
+            Senhor(a) {tiket.nome} entrou em contato requisitando a reiteração e
+            brevidade no chamado{' '}
+            <a href={`https://jira.stf.jus.br/browse/${tiket.chamado}`}>
+              SERVICEDESK-{tiket.chamado}
+            </a>
+            .
+          </p>
+          <p>Login: {tiket.login}</p>
+          <p>Ramal: {tiket.ramal}</p>
+        </>
+      )}
     </div>
   );
 };

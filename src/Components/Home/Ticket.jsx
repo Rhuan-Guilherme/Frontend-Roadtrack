@@ -20,7 +20,9 @@ const Ticket = ({ tiket }) => {
         </span>
       </div>
 
-      <p className="text-xs font-semibold text-cinza-900">{tiket.area}</p>
+      {tiket.area && (
+        <p className="text-xs font-semibold text-cinza-900">{tiket.area}</p>
+      )}
 
       <span className="h-[2px] bg-cinza-300"></span>
 
