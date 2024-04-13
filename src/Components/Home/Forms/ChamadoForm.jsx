@@ -86,13 +86,14 @@ const ChamadoForm = () => {
           )}
 
           <div className="flex flex-col gap-1 w-full relative -top-[3px]">
-            <label htmlFor="login">Login</label>
             <InputsHome
               type="text"
               name="login"
               value={login}
               onChange={handleLogin}
-            />
+            >
+              Login
+            </InputsHome>
             {users && users.length > 0 && (
               <div className="w-full bg-cinza-200 max-h-96 border border-cinza-400 overflow-x-auto z-10 rounded-md mt-1 absolute flex flex-col gap-1 shadow-xl top-[4.5rem] ">
                 {users.map((user) => (
@@ -109,7 +110,7 @@ const ChamadoForm = () => {
           </div>
           <InputsHome
             type="text"
-            name="login"
+            name="nome"
             value={nome}
             onChange={({ target }) => setNome(target.value)}
           >
@@ -147,7 +148,7 @@ const ChamadoForm = () => {
         <div className="flex gap-4 w-full">
           <InputsHome
             type="text"
-            name="informacao"
+            name="local"
             value={local}
             onChange={({ target }) => setLocal(target.value)}
           >

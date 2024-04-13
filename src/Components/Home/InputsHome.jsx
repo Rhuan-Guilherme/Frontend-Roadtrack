@@ -3,7 +3,9 @@ import React from 'react';
 const InputsHome = ({ children, name, type, value, onChange }) => {
   return (
     <div className="flex flex-col gap-1 w-full">
-      <label htmlFor={name}>{children}</label>
+      <label htmlFor={name} className=" text-cinza-900 font-semibold">
+        {children}
+      </label>
       <input
         type={type}
         name={name}

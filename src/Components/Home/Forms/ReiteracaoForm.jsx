@@ -77,13 +77,14 @@ const ReiteracaoForm = () => {
           </div>
         )}
         <div className="flex flex-col gap-1 w-full relative -top-[3px]">
-          <label htmlFor="login">Login</label>
           <InputsHome
             type="text"
             name="login"
             value={login}
             onChange={handleLogin}
-          />
+          >
+            Login
+          </InputsHome>
           {users && users.length > 0 && (
             <div className="w-full bg-cinza-200 max-h-96 border border-cinza-400 overflow-x-auto z-10 rounded-md mt-1 absolute flex flex-col gap-1 shadow-xl top-[4.5rem] ">
               {users.map((user) => (
