@@ -22,6 +22,8 @@ const ReiteracaoForm = () => {
     cargo,
     vip,
     area,
+    chamado,
+    setChamado,
   } = React.useContext(TikectesContext);
   const { users, setUsers, returnUsers } = useUsers();
 
@@ -109,7 +111,14 @@ const ReiteracaoForm = () => {
         </InputsHome>
       </div>
       <div className="flex gap-4 w-full">
-        <InputsHome>N° do chamado</InputsHome>
+        <InputsHome
+          type="text"
+          name="chamado"
+          value={chamado}
+          onChange={({ target }) => setChamado(target.value)}
+        >
+          N° do chamado
+        </InputsHome>
         <InputsHome
           type="text"
           name="login"

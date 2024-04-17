@@ -18,7 +18,7 @@ const Header = () => {
         RoadTrack
       </Link>
       <nav className="hidden lg:flex gap-5 font-semibold font-poppins text-cinzaEscuro-500 dark:text-cinza-100">
-        <Link to="/home">Home</Link>
+        <Link to="/">Home</Link>
         <Link to="/organograma">Organograma</Link>
         <Link to="/lista">Lista</Link>
       </nav>

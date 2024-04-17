@@ -22,7 +22,6 @@ const QuedaForm = () => {
           onChange={({ target }) => setRamal(target.value)}
         >
           Ramal da queda
-          {ramal}
         </InputsHome>
       </div>
       <div className="flex items-center gap-4">

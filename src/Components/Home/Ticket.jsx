@@ -2,9 +2,19 @@ import React, { useContext } from 'react';
 import Descricao from './TiketsParts/Descricao';
 import { TikectesContext } from '../../contexts/TikectesContext';
 import Detail from './TiketsParts/Detail';
+import ModalEdit from '../Modal/ModalEdit';
 
 const Ticket = ({ tiket }) => {
   const { deleteTicket } = useContext(TikectesContext);
+  const [showModal, setShowModal] = React.useState(false);
+
+  const handleEditClick = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div
@@ -44,7 +54,10 @@ const Ticket = ({ tiket }) => {
       <span className="h-[2px] bg-cinza-300"></span>
 
       <div className="bg-cinza-200 h-12 rounded-lg flex justify-center items-center gap-3 shadow">
-        <button className="bg-white py-1 px-3 rounded-lg font-poppins font-semibold text-cinza-900 shadow">
+        <button
+          onClick={handleEditClick}
+          className="bg-white py-1 px-3 rounded-lg font-poppins font-semibold text-cinza-900 shadow"
+        >
           Editar
         </button>
         <button className="bg-white py-1 px-3 rounded-lg font-poppins font-semibold text-cinza-900 shadow">
@@ -53,6 +66,7 @@ const Ticket = ({ tiket }) => {
         <button className="bg-white py-1 px-3 rounded-lg font-poppins font-semibold text-cinza-900 shadow">
           Concluir
         </button>
+        <ModalEdit ticket={tiket} show={showModal} onClose={handleCloseModal} />
       </div>
     </div>
   );

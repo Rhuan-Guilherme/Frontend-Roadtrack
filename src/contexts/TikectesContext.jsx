@@ -18,6 +18,7 @@ export const TikectesStore = ({ children }) => {
   const [informacao, setInformacao] = React.useState('');
   const [local, setLocal] = React.useState('');
   const [cargo, setCargo] = React.useState('');
+  const [chamado, setChamado] = React.useState('');
   const [destinatario, setDestinatario] = React.useState('');
   const [loading, setLoading] = React.useState(false);
 
@@ -42,6 +43,7 @@ export const TikectesStore = ({ children }) => {
         ramal,
         patrimonio,
         informacao,
+        chamado,
         local,
         destinatario,
         created_at: `${dia}/${mes}/${ano} às ${hora}:${minutoFormatado}`,
@@ -63,6 +65,7 @@ export const TikectesStore = ({ children }) => {
       setLocal('');
       setVip('');
       setDestinatario('');
+      setChamado('');
       returnTickets();
       setLoading(false);
     }
@@ -134,6 +137,8 @@ export const TikectesStore = ({ children }) => {
         destinatario,
         setDestinatario,
         deleteTicket,
+        chamado,
+        setChamado,
       }}
     >
       {children}
