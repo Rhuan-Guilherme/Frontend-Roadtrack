@@ -128,6 +128,19 @@ export function POST_TICKETS(body) {
   };
 }
 
+export function PUT_TICKETS(body) {
+  return {
+    url: API_URL + 'tickets',
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    },
+  };
+}
+
 export function DELETE_TICKETS(id) {
   return {
     url: API_URL + `tickets?id=${id}`,

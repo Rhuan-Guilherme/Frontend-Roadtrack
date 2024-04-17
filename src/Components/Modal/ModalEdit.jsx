@@ -2,9 +2,11 @@ import React from 'react';
 import { Modal } from 'flowbite-react';
 import Button from '../Form/Button';
 import InputsHome from '../Home/InputsHome';
+import { PUT_TICKETS } from '../../api';
+import { TikectesContext } from '../../contexts/TikectesContext';
+import Loader from '../layout/Loader';
 
 const ModalEdit = ({ ticket, show, onClose }) => {
-  const [modal, setModal] = React.useState();
   const [nome, setNome] = React.useState(ticket.nome);
   const [login, setLogin] = React.useState(ticket.login);
   const [ramal, setRamal] = React.useState(ticket.ramal);
@@ -13,13 +15,42 @@ const ModalEdit = ({ ticket, show, onClose }) => {
   const [local, setLocal] = React.useState(ticket.local);
   const [chamado, setChamado] = React.useState(ticket.chamado);
   const [destinatario, setDestinatario] = React.useState(ticket.destinatario);
+  const [loading, setLoading] = React.useState(false);
+
+  const { returnTickets } = React.useContext(TikectesContext);
+
+  const handleAtualizacao = async (e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const { url, options } = PUT_TICKETS({
+        ticket_id: ticket.id,
+        nome,
+        login,
+        ramal,
+        patrimonio,
+        informacao,
+        local,
+        chamado,
+        destinatario,
+      });
+      const response = await fetch(url, options);
+      const json = await response.json();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      returnTickets();
+      onClose();
+    }
+  };
 
   return (
     <>
       <Modal show={show} size="2xl" onClose={onClose}>
         <Modal.Header>Edição</Modal.Header>
         <Modal.Body>
-          <form>
+          <form onSubmit={handleAtualizacao}>
             {ticket.tipo == 'chamado' && (
               <div className="flex flex-col gap-5">
                 <div className="flex gap-2">
@@ -168,7 +199,10 @@ const ModalEdit = ({ ticket, show, onClose }) => {
             )}
 
             <div className="mt-4">
-              <Button>Atualizar</Button>
+              <div className="flex items-center gap-4">
+                <Button>Atualizar</Button>
+                {loading && <Loader />}
+              </div>
             </div>
           </form>
         </Modal.Body>
