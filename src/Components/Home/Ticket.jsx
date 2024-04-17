@@ -1,23 +1,36 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Descricao from './TiketsParts/Descricao';
+import { TikectesContext } from '../../contexts/TikectesContext';
+import Detail from './TiketsParts/Detail';
 
 const Ticket = ({ tiket }) => {
+  const { deleteTicket } = useContext(TikectesContext);
+
   return (
     <div
-      className={`flex flex-col gap-2 bg-cinza-100 w-[19rem] h-auto p-2 rounded-md ${
+      className={`flex flex-col gap-2 bg-cinza-100 w-[18.1rem] h-auto p-2 rounded-md relative ${
         tiket.vip === 'sim' ? 'border border-yellow-400' : 'border=none'
       } `}
     >
+      <button
+        onClick={() => deleteTicket(tiket.id)}
+        className="w-6 h-6 rounded-md bg-cinza-300 absolute right-2"
+      >
+        <span
+          data-v-32fc746a=""
+          className="material-symbols-outlined text-base"
+        >
+          close
+        </span>
+      </button>
+
       <p className="text-xs font-semibold text-cinza-700">{tiket.created_at}</p>
 
       <div className="flex items-center gap-3">
         <p className="font-roboto">
           {tiket.nome.split(' ')[0]} - {tiket.ramal}
         </p>
-        <span className="bg-[#CECAFF] border border-roxo-300 rounded-md text-xs text-roxo-900 font-roboto font-semibold flex justify-center items-center gap-2 px-1 h-5">
-          <span className="w-2 h-2 bg-roxo-300 rounded-full"></span>
-          Chamado
-        </span>
+        <Detail tipo={tiket.tipo} />
       </div>
 
       {tiket.area && (

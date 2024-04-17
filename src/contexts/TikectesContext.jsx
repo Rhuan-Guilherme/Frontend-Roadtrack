@@ -1,6 +1,6 @@
 import React from 'react';
 import { UserContext } from '../contexts/UserContext';
-import { GET_TIKECTS, POST_TICKETS } from '../api';
+import { DELETE_TICKETS, GET_TIKECTS, POST_TICKETS } from '../api';
 
 export const TikectesContext = React.createContext();
 
@@ -68,6 +68,20 @@ export const TikectesStore = ({ children }) => {
     }
   }
 
+  const deleteTicket = async (id) => {
+    try {
+      setLoading(true);
+      const { url, options } = DELETE_TICKETS(id);
+      const response = await fetch(url, options);
+      const json = await response.json();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+      returnTickets();
+    }
+  };
+
   const returnTickets = React.useCallback(async () => {
     try {
       setLoading(true);
@@ -119,6 +133,7 @@ export const TikectesStore = ({ children }) => {
         setLoading,
         destinatario,
         setDestinatario,
+        deleteTicket,
       }}
     >
       {children}

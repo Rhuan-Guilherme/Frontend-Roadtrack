@@ -128,6 +128,18 @@ export function POST_TICKETS(body) {
   };
 }
 
+export function DELETE_TICKETS(id) {
+  return {
+    url: API_URL + `tickets?id=${id}`,
+    options: {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  };
+}
+
 export function ALTER_DADOS(body) {
   return {
     url: API_URL + 'dados',
