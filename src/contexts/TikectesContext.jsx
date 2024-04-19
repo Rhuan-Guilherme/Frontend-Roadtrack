@@ -1,6 +1,12 @@
 import React from 'react';
 import { UserContext } from '../contexts/UserContext';
-import { DELETE_TICKETS, GET_TIKECTS, POST_TICKETS } from '../api';
+import {
+  DELETE_TICKETS,
+  FECHA_TICKETS,
+  GET_TIKECTS,
+  POST_TICKETS,
+  REABRE_TICKETS,
+} from '../api';
 
 export const TikectesContext = React.createContext();
 
@@ -85,6 +91,27 @@ export const TikectesStore = ({ children }) => {
     }
   };
 
+  const fechaTicket = async (id) => {
+    try {
+      const { url, options } = FECHA_TICKETS(id);
+      const response = await fetch(url, options);
+      const json = await response.json();
+      returnTickets();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const reabreTicket = async (id) => {
+    try {
+      const { url, options } = REABRE_TICKETS(id);
+      const response = await fetch(url, options);
+      const json = await response.json();
+      returnTickets();
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const returnTickets = React.useCallback(async () => {
     try {
       setLoading(true);
@@ -139,6 +166,8 @@ export const TikectesStore = ({ children }) => {
         deleteTicket,
         chamado,
         setChamado,
+        fechaTicket,
+        reabreTicket,
       }}
     >
       {children}

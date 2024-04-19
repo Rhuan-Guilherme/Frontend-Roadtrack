@@ -62,7 +62,7 @@ const HomePage = () => {
       </div>
 
       {tickets && (
-        <section className="mt-10 bg-cinza-300 w-full p-3 flex flex-wrap gap-3 items-center justify-center">
+        <section className="mt-10 bg-cinza-200 w-full p-3 flex flex-wrap gap-3 items-center justify-center rounded-lg">
           {tickets.map((tiket) => (
             <Ticket tiket={tiket} />
           ))}

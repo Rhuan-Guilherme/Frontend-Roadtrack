@@ -1,5 +1,5 @@
 const API_URL = 'http://localhost/API/';
-// const API_URL = 'https://roadtrack.com/API/'
+// const API_URL = 'https://roadtrack.com.br/API/';
 
 export function TOKEN_POST(body) {
   return {
@@ -137,6 +137,32 @@ export function PUT_TICKETS(body) {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(body),
+    },
+  };
+}
+
+export function FECHA_TICKETS(id) {
+  return {
+    url: API_URL + `options?id=${id}`,
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ remove: false }),
+    },
+  };
+}
+
+export function REABRE_TICKETS(id) {
+  return {
+    url: API_URL + `options?id=${id}`,
+    options: {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ remove: true }),
     },
   };
 }
