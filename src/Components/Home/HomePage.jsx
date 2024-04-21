@@ -23,7 +23,7 @@ const HomePage = () => {
   if (!login) return <Navigate to="/login" />;
   return (
     <main
-      className={`w-full mt-10 flex flex-col items-center ${
+      className={`w-full mt-10 flex mb-10 flex-col items-center ${
         slideExpand ? 'ml-20 mr-48' : 'mx-[10%]'
       } transition-all duration-100`}
     >

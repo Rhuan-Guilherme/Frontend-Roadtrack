@@ -11,7 +11,7 @@ const Descricao = ({ tiket }) => {
           </p>
           <p>Nome: {tiket.nome}</p>
           <p>Login: {tiket.login}</p>
-          <p>Ramal: {tiket.login}</p>
+          <p>Ramal: {tiket.ramal}</p>
           <p>Local: {tiket.local}</p>
           <p>Patrimônio: {tiket.patrimonio}</p>
         </>

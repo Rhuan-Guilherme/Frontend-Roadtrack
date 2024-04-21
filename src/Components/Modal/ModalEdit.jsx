@@ -7,6 +7,7 @@ import { TikectesContext } from '../../contexts/TikectesContext';
 import Loader from '../layout/Loader';
 
 const ModalEdit = ({ ticket, show, onClose }) => {
+  console.log(ticket);
   const [nome, setNome] = React.useState(ticket.nome);
   const [login, setLogin] = React.useState(ticket.login);
   const [ramal, setRamal] = React.useState(ticket.ramal);
@@ -174,7 +175,7 @@ const ModalEdit = ({ ticket, show, onClose }) => {
                     value={nome}
                     onChange={({ target }) => setNome(target.value)}
                   >
-                    Login
+                    Nome
                   </InputsHome>
                   <InputsHome
                     type="text"

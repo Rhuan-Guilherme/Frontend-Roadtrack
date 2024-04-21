@@ -88,11 +88,13 @@ const Ticket = ({ tiket }) => {
             >
               Concluir
             </button>
-            <ModalEdit
-              ticket={tiket}
-              show={showModal}
-              onClose={handleCloseModal}
-            />
+            {showModal && (
+              <ModalEdit
+                ticket={tiket}
+                show={showModal}
+                onClose={handleCloseModal}
+              />
+            )}
           </div>
         </>
       )}
