@@ -5,7 +5,7 @@ import Detail from './TiketsParts/Detail';
 import ModalEdit from '../Modal/ModalEdit';
 
 const Ticket = ({ tiket }) => {
-  const { deleteTicket, fechaTicket, reabreTicket } =
+  const { deleteTicket, fechaTicket, reabreTicket, clipboard } =
     useContext(TikectesContext);
   const [showModal, setShowModal] = React.useState(false);
 
@@ -67,7 +67,6 @@ const Ticket = ({ tiket }) => {
       <span className="h-[2px] bg-cinza-300"></span>
 
       <Descricao tiket={tiket} />
-
       {tiket.status === 'Aberto' && (
         <>
           <span className="h-[2px] bg-cinza-300"></span>
@@ -79,7 +78,10 @@ const Ticket = ({ tiket }) => {
             >
               Editar
             </button>
-            <button className="bg-white py-1 px-3 rounded-lg font-poppins font-semibold text-cinza-900 shadow">
+            <button
+              onClick={() => clipboard(tiket, tiket.tipo)}
+              className="bg-white py-1 px-3 rounded-lg font-poppins font-semibold text-cinza-900 shadow"
+            >
               Copiar
             </button>
             <button

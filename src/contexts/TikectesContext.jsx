@@ -27,6 +27,7 @@ export const TikectesStore = ({ children }) => {
   const [chamado, setChamado] = React.useState('');
   const [destinatario, setDestinatario] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [copy, setCopy] = React.useState(false);
 
   async function postTikects(tipoChamado) {
     setLoading(true);
@@ -112,6 +113,49 @@ export const TikectesStore = ({ children }) => {
     }
   };
 
+  const clipboard = (ticket, tipo) => {
+    let cardText = '';
+    switch (tipo) {
+      case 'chamado':
+        cardText = `Prezados, o Sr(a). ${
+          ticket.nome.split(' ')[0]
+        } entrou em contato ${ticket.informacao}.\n\nNome: ${
+          ticket.nome
+        }\nLogin: ${ticket.login}\nRamal: ${ticket.ramal}\nLocal: ${
+          ticket.local
+        }\nPatrimônio: ${ticket.patrimonio}\n
+        `;
+        break;
+      case 'queda':
+        cardText = `Senhor(a) Senhor(a) não identificado entrou em contato com o helpdesk no ramal 3416 e interrompeu a ligação antes do atendimento inicial.\n\nRamal: ${ticket.ramal}`;
+        break;
+      case 'trasnferencia':
+        cardText = `Senhor(a) ${ticket.nome} entrou em contato solicitando transferência de ligação para o(a) senhor(a) ${ticket.destinatario}.\n\nRamal: ${ticket.ramal}`;
+        break;
+      case 'reiteracao':
+        cardText = `Senhor(a) ${ticket.nome} entrou em contato requisitando a reiteração e brevidade no chamado SERVICEDESK-${ticket.chamado}\n\nLogin: ${ticket.login}\nRamal: ${ticket.ramal}`;
+        break;
+      default:
+        console.error('Tipo de cartão desconhecido:', tipo);
+        break;
+    }
+
+    navigator.clipboard
+      .writeText(cardText)
+      .then(() => {
+        setCopy(true);
+        setTimeout(() => {
+          setCopy(false);
+        }, 3000);
+      })
+      .catch((err) => {
+        console.error('Erro ao copiar o conteúdo:', err);
+        alert(
+          'Erro ao copiar o conteúdo. Verifique se o navegador suporta essa funcionalidade.',
+        );
+      });
+  };
+
   const returnTickets = React.useCallback(async () => {
     try {
       setLoading(true);
@@ -168,6 +212,8 @@ export const TikectesStore = ({ children }) => {
         setChamado,
         fechaTicket,
         reabreTicket,
+        clipboard,
+        copy,
       }}
     >
       {children}

@@ -14,7 +14,7 @@ const HomePage = () => {
   const { login } = React.useContext(UserContext);
   const { slideExpand } = React.useContext(AnimeContext);
   const [formSelect, setFormSelect] = React.useState('chamado');
-  const { tickets } = React.useContext(TikectesContext);
+  const { tickets, copy } = React.useContext(TikectesContext);
 
   const handleFormSelect = (value) => {
     setFormSelect(value);
@@ -27,6 +27,12 @@ const HomePage = () => {
         slideExpand ? 'ml-20 mr-48' : 'mx-[10%]'
       } transition-all duration-100`}
     >
+      {copy && (
+        <p className="w-72 h-10 bg-cinza-300 flex items-center p-2 font-poppins text-cinzaEscuro-500 rounded-md shadow-md border border-cinza-500 font-semibold fixed right-2 z-10 transition-all duration-100 copy">
+          Copiado com sucesso!
+        </p>
+      )}
+
       <div className="bg-cinza-100 border border-cinza-300 shadow-sm rounded-md p-1 flex gap-2 w-auto">
         <ButtonTicket
           onClick={() => handleFormSelect('chamado')}

@@ -2,3 +2,22 @@
   display: flex;
   height: calc(100% - 64px);
 }
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+.copy{
+  animation: fade 2s ease-in-out forwards;
+}
