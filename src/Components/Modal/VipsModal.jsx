@@ -64,12 +64,12 @@ const VipsModal = () => {
                   className="border border-cinza-400 w-full text-base p-3 bg-cinza-300 dark:bg-cinzaRoxo-700 dark:border-cinzaRoxo-100 rounded-lg transition-all focus:outline-none focus:border-roxo-300 focus:shadow-[0_0_0_2px_#B8ACFF] focus:bg-cinza-100 hover:outline-none hover:border-roxo-300 hover:shadow-[0_0_0_2px_#B8ACFF] hover:bg-cinza-100"
                 />
                 {users && (
-                  <div className="w-full bg-cinza-400 max-h-56 overflow-x-auto z-10 rounded-md mt-1 absolute flex flex-col gap-1 shadow-xl border">
+                  <div className="w-full bg-cinza-200 max-h-96 border border-cinza-400 overflow-x-auto z-10 rounded-md mt-1 absolute flex flex-col gap-1 shadow-xl top-[3rem] ">
                     {users.map((user) => (
                       <div
                         key={user.id}
                         onClick={({ target }) => clickUser(target)}
-                        className="bg-cinza-600 rounded-md p-2 cursor-pointer"
+                        className="border-b border-cinza-400 p-2 cursor-pointer flex items-center gap-4 indent-px"
                       >
                         {user.login} {user.vip == 'sim' && <span> - VIP</span>}
                       </div>

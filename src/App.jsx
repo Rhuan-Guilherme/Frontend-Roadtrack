@@ -20,7 +20,7 @@ function App() {
           <AnimeStore>
             <TikectesStore>
               <Header />
-              <main className="mainContainer dark:bg-cinzaRoxo-600">
+              <main className="mainContainer dark:bg-cinzaRoxo-600 ">
                 <SlideBar />
                 <VipsModal />
                 <LinksModal />

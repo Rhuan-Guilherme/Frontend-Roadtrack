@@ -24,9 +24,11 @@ export const UserStore = ({ children }) => {
       setError(false);
       setLoading(true);
       const { url, options } = TOKEN_POST({ email, senha });
-      const reponse = await fetch(url, options);
-      if (!reponse.ok) throw new Error('Usuário ou senha inváildos');
-      const json = await reponse.json();
+      const response = await fetch(url, options);
+      // if (!response.ok) throw new Error('Usuário ou senha inváildos');
+      console.log(response);
+      const json = await response.json();
+      console.log(json);
       window.localStorage.setItem('token', json.token);
       await getUser(json.token);
       navigate('/conta');

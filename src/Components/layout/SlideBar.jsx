@@ -25,7 +25,7 @@ const SlideBar = () => {
   if (!login) return false;
   return (
     <nav
-      className={`mt-2 md:mt-2 rounded-md md:rounded-lg relative mb-96 shadow flex bg-cinza-200 dark:bg-cinzaRoxo-800 transition-all duration-300 border-r dark:border-cinzaEscuro-500 ${
+      className={`mt-2 md:mt-2 rounded-md md:rounded-lg h-screen relative mb-96 shadow flex bg-cinza-200 dark:bg-cinzaRoxo-800 transition-all duration-300 border-r dark:border-cinzaEscuro-500 ${
         slideExpand ? 'lg:w-1/6' : 'w-0 '
       }`}
     >

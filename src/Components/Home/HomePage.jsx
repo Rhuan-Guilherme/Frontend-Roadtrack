@@ -23,9 +23,9 @@ const HomePage = () => {
   if (!login) return <Navigate to="/login" />;
   return (
     <main
-      className={`w-full mt-10 flex mb-10 flex-col items-center ${
+      className={`w-full mt-10 flex  flex-col items-center ${
         slideExpand ? 'ml-20 mr-48' : 'mx-[10%]'
-      } transition-all duration-100`}
+      } transition-all duration-100 overflow-y-scroll`}
     >
       {copy && (
         <p className="w-72 h-10 bg-cinza-300 flex items-center p-2 font-poppins text-cinzaEscuro-500 rounded-md shadow-md border border-cinza-500 font-semibold fixed right-2 z-10 transition-all duration-100 copy">
